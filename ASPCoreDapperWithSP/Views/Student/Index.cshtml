@@ -1,0 +1,67 @@
+﻿@model List<Student>
+@{
+    ViewData["Title"] = "Index";
+}
+@if (TempData["msg"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        @* Display a success toast, with a title*@
+            toastr.success('@TempData["msg"]')
+
+
+    </script>
+   
+
+
+}
+<h1>Index</h1>
+
+<div class="container p-4">
+    <div class="row p-3">
+        <div class="col-6">
+            <h2>Student</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-action="Create" asp-controller="Student" class="btn btn-primary"><i class="bi bi-plus-circle"></i>&nbsp;Create New student</a>
+        </div>
+    </div>
+</div>
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>student Name</th>
+            <th>EmailAddress</th>
+            <th>City</th>
+            <th>CreationDate</th>
+            <th>CreatedBy</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                
+                <td>@item.StudentName</td>
+                <td>@item.EmailAddress</td>
+                <td>@item.City</td>
+                <td>@item.CreationDate</td>
+                <td>@item.CreatedBy</td>
+                <td role="group">
+                    <a asp-controller="Student" asp-action="Create" asp-route-id="@item.StudentId"><i class="bi bi-pencil-square"></i></a>
+                    <a asp-controller="Category" asp-action="Delete" asp-route-id="@item.StudentId"><i class="bi bi-trash"></i></a>
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+
+
+
